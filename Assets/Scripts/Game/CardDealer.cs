@@ -5,11 +5,12 @@ namespace Game
 {
     public class CardDealer : MonoBehaviour
     {
+        private const int TimerDuration = 5;
         [SerializeField] private TimerView timerView;
 
         private void Start()
         {
-            timerView.StartTimer(5, OnTimeExpired);
+            timerView.StartTimer(TimerDuration, OnTimeExpired);
         }
 
         private void OnTimeExpired()

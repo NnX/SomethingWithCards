@@ -25,7 +25,7 @@ namespace UI
             UpdateTimerTask().Forget();
         }
 
-        public async UniTask UpdateTimerTask()
+        private async UniTask UpdateTimerTask()
         {
             while (!_isStopped)
             {
@@ -40,7 +40,6 @@ namespace UI
 
                 UpdateTimerText();
             }
-            
         }
 
         private void UpdateTimerText()
@@ -52,8 +51,7 @@ namespace UI
         public void StopTimer()
         {
             _isStopped = true;
-            //timeView.text = TimeSpan.Zero.ToString(@"mm\:ss");
-            timeView.text = "Finished";
+            timeView.text = "Time's up, over";
         }
         
     }

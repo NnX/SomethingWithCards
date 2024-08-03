@@ -11,8 +11,8 @@ namespace Game
 
         private int _deckSize;
 
-        private List<CardView> _cardsDeckList = new();
-        private List<Card> _cardsToMatch = new();
+        private readonly List<CardView> _cardsDeckList = new();
+        private readonly List<Card> _cardsToMatch = new();
 
         private int _cardsToMatchCount;
         
@@ -63,7 +63,7 @@ namespace Game
             }
             else
             {
-                await UniTask.Delay(0.5f);
+                await UniTask.Delay(0.5f); // wait for card show animation finished
                 HideFaces(skipMatched:true); 
             }
             _cardsToMatch.Clear();

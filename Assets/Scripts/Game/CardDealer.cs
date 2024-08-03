@@ -4,11 +4,13 @@ using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils.Extensions;
+using Window;
 
 namespace Game
 {
     public class CardDealer : MonoBehaviour
     {
+        private const string GameOverMessage = "Restart Game?";
         private const int TimerDuration = 5;
         private const int SameCardsSize = 2;
         private const float ShowHintDuration = 2f;
@@ -17,6 +19,8 @@ namespace Game
         [SerializeField] private TimerView timerView;
         [SerializeField] private Button hintButton;
         [SerializeField] private GameBoard gameBoard;
+        [SerializeField] private PopUpWindow popUpWindowPrefab;
+        [SerializeField] private Transform windowsRoot;
         
         private readonly List<Card> _cardsList = new();
 
@@ -68,7 +72,6 @@ namespace Game
 
         private void OnTimeExpired()
         {
-            
             timerView.StopTimer();
             OnGameOver();
         }
@@ -76,7 +79,19 @@ namespace Game
         private void OnGameOver()
         {
             //TODO show win/lose result
-            //TODO show restart button
+            ShowGameOverPopUp();
+        }
+
+        private void ShowGameOverPopUp()
+        {
+            var popupWindow = Instantiate(popUpWindowPrefab, windowsRoot);
+            popupWindow.Init(GameOverMessage, RestartGame);
+        }
+
+        private void RestartGame()
+        {
+            Destroy(windowsRoot.GetChild(0).gameObject);
+            timerView.StartTimer(TimerDuration, OnTimeExpired);
         }
  
     }

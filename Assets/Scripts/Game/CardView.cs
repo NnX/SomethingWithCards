@@ -68,21 +68,16 @@ namespace Game
         
         public void HideFace(bool skipMatched = false, bool isForceHide = false)
         {
-            Debug.Log($"--- Card ID = {_card.Id}, value = {_card.GetValue()}---");
-            Debug.Log($"IsFaceShowed = {IsFaceShowed}, IsMatched = {_isMatched}");
             if ( _isMatched && skipMatched && !isForceHide)
             {
-                Debug.Log($" Skip DOFade");
                 return;
             }
             
             bool isAlreadyHidden = Math.Abs(cardBack.color.a - 1) < 0.01f; 
             if (isAlreadyHidden)
             {
-                Debug.Log($" Skip DOFade");
                 return;
             }
-            Debug.Log($"!!!!!DOFade");
             cardBack.DOFade(1, FadeDuration); 
         }
 

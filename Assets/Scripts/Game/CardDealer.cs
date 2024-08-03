@@ -11,6 +11,7 @@ namespace Game
     {
         private const int TimerDuration = 5;
         private const int SameCardsSize = 2;
+        private const float ShowHintDuration = 2f;
         
         [SerializeField] private int deckSize;
         [SerializeField] private TimerView timerView;
@@ -29,7 +30,7 @@ namespace Game
         {
             PrepareDeck();
             ShuffleDeck();
-            gameBoard.Init(_cardsList);
+            gameBoard.Init(_cardsList, SameCardsSize);
             
             timerView.StartTimer(TimerDuration, OnTimeExpired); 
         }
@@ -44,11 +45,11 @@ namespace Game
             _cardsList.Clear();
             int currentValue = 1; // star from 1, just to show cards with values
  
-            for (int i = 0; i < deckSize; i++)
+            for (int id = 0; id < deckSize; id++)
             {
-                Card card = new Card(currentValue);
+                Card card = new Card(currentValue, id);
                 _cardsList.Add(card);
-                if (i % SameCardsSize != 0) // increase card value every odd i, so we have 2 cards with same values
+                if (id % SameCardsSize != 0) // increase card value every odd i, so we have 2 cards with same values
                 { 
                     currentValue++; 
                 } 
@@ -62,7 +63,7 @@ namespace Game
 
         private void ShowHint()
         {
-            //TODO show and shuffle
+            gameBoard.PlayHint(ShowHintDuration);
         }
 
         private void OnTimeExpired()

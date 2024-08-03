@@ -184,6 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 373663300}
   - component: {fileID: 373663301}
+  - component: {fileID: 373663302}
   m_Layer: 0
   m_Name: CardDealer
   m_TagString: Untagged
@@ -222,6 +223,18 @@ MonoBehaviour:
   timerView: {fileID: 242791003}
   hintButton: {fileID: 686453051}
   gameBoard: {fileID: 1156355345}
+--- !u!114 &373663302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373663299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da537c8e658ad3847b81be0d5cc7f195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

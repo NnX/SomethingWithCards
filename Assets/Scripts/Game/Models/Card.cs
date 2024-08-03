@@ -2,16 +2,23 @@ namespace Game.Models
 {
     public class Card
     {
-        private int value;
+        public int Id { get; private set; }
+        private readonly int _value;
 
-        public Card(int value)
+        public Card(int value, int id)
         {
-            this.value = value;
+            Id = id;
+            _value = value;
         }
 
         public int GetValue()
         {
-            return value;
+            return _value;
+        }
+        
+        public bool IsMatches(int value)
+        {
+            return _value == value;
         }
     }
 }

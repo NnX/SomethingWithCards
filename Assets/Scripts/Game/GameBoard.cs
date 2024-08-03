@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Models;
@@ -15,6 +16,8 @@ namespace Game
         private readonly List<Card> _cardsToMatch = new();
 
         private int _cardsToMatchCount;
+
+        public event Action OnAllCardsMatched;
         
         public void Init(List<Card> cardDeck, int cardsToMatchCount)
         {
@@ -67,6 +70,25 @@ namespace Game
                 HideFaces(skipMatched:true); 
             }
             _cardsToMatch.Clear();
+
+            if (IsGameFinished())
+            {
+                await UniTask.Delay(0.5f); // wait for card show animation finished
+                OnAllCardsMatched?.Invoke();
+            }
+        }
+
+        private bool IsGameFinished()
+        {
+            foreach (var cardView in _cardsDeckList)
+            {
+                if (!cardView.IsMatched())
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public async void PlayHint(float secondsShowTime)
@@ -89,6 +111,15 @@ namespace Game
             foreach (var cardView in _cardsDeckList)
             {
                 cardView.HideFace(skipMatched, isForceHide);
+            }
+        }
+
+        public void ResetGame()
+        {
+            foreach (var cardView in _cardsDeckList)
+            {
+                cardView.HideFace (isForceHide : true);
+                cardView.ResetMatched();
             }
         }
         

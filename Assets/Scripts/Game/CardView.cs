@@ -108,5 +108,15 @@ namespace Game
                 }
             }
         }
+
+        public bool IsMatched()
+        {
+            return _isMatched;
+        }
+
+        public void ResetMatched()
+        {
+            _isMatched = false;
+        }
     }
 }

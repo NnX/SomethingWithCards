@@ -4,6 +4,7 @@ using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils.Extensions;
+using Utils.SaveSystems;
 using Window;
 
 namespace Game
@@ -11,7 +12,7 @@ namespace Game
     public class CardDealer : MonoBehaviour
     {
         private const string GameOverMessage = "Restart Game?";
-        private const int TimerDuration = 5;
+        private const int TimerDuration = 150;
         private const int SameCardsSize = 2;
         private const float ShowHintDuration = 2f;
         
@@ -21,13 +22,27 @@ namespace Game
         [SerializeField] private GameBoard gameBoard;
         [SerializeField] private PopUpWindow popUpWindowPrefab;
         [SerializeField] private Transform windowsRoot;
-        
+
+        private ISavable _saveSystem;
         private readonly List<Card> _cardsList = new();
 
         private void Start()
         {
+            InitSaveSystem();
             InitGame();
             InitListeners();
+        }
+
+        private void InitSaveSystem()
+        {
+#if USE_FILE_SAVES
+            _saveSystem = new FileSave();
+#elif USE_PREFS_SAVES
+            // TODO implement prefs saves
+#elif USE_BASE64_SAVES
+            // TODO implement base64 saves
+#endif
+            _saveSystem.Load();
         }
 
         private void InitGame()
@@ -63,6 +78,7 @@ namespace Game
         private void InitListeners()
         {
             hintButton.onClick.AddListener(ShowHint);
+            gameBoard.OnAllCardsMatched += ShowGameOverPopUp;
         }
 
         private void ShowHint()
@@ -91,6 +107,7 @@ namespace Game
         private void RestartGame()
         {
             Destroy(windowsRoot.GetChild(0).gameObject);
+            gameBoard.ResetGame();
             timerView.StartTimer(TimerDuration, OnTimeExpired);
         }
  

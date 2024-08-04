@@ -15,6 +15,7 @@ namespace Game
         private const int TimerDuration = 150;
         private const int SameCardsSize = 2;
         private const float ShowHintDuration = 2f;
+        private const float StartGameShowDuration = 3f;
         
         [SerializeField] private int deckSize;
         [SerializeField] private TimerView timerView;
@@ -50,7 +51,7 @@ namespace Game
             PrepareDeck();
             ShuffleDeck();
             gameBoard.Init(_cardsList, SameCardsSize);
-            
+            gameBoard.PlayStartGame(StartGameShowDuration);
             timerView.StartTimer(TimerDuration, OnTimeExpired); 
         }
 
@@ -94,7 +95,6 @@ namespace Game
 
         private void OnGameOver()
         {
-            //TODO show win/lose result
             ShowGameOverPopUp();
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Models;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
@@ -93,6 +94,13 @@ namespace Game
 
         public async void PlayHint(float secondsShowTime)
         {
+            ShuffleCardViews();
+            ShowFaces();
+            await UniTask.Delay(secondsShowTime);
+            HideFaces(skipMatched:true);
+        } 
+        public async void PlayStartGame(float secondsShowTime)
+        {
             ShowFaces();
             await UniTask.Delay(secondsShowTime);
             HideFaces();
@@ -120,6 +128,16 @@ namespace Game
             {
                 cardView.HideFace (isForceHide : true);
                 cardView.ResetMatched();
+            }
+        }
+
+        private void ShuffleCardViews()
+        {
+            int viewsCount = _cardsDeckList.Count;
+            for (int i = 0; i < _cardsDeckList.Count; i++)
+            {
+                var randomIndex = Random.Range(i, viewsCount);
+                _cardsDeckList[i].transform.SetSiblingIndex(randomIndex);
             }
         }
         

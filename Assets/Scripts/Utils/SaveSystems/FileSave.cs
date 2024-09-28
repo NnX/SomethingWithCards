@@ -29,8 +29,10 @@ namespace Utils.SaveSystems
             {
                 if (fileStream.Length == 0)
                 {
-                    _saveParameters = new SaveDataParameters();
-                    _saveParameters.deckSize = 0;
+                    _saveParameters = new SaveDataParameters
+                    {
+                        deckSize = 0
+                    };
                     Debug.Log("Created new save");
                 }
                 else

@@ -2,8 +2,6 @@ using System;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using Utils;
-
 namespace UI
 { 
     public class TimerView : MonoBehaviour

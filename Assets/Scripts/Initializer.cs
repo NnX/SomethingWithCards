@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 using Utils;
 
 public class Initializer : MonoBehaviour
-{  
-    void Start()
+{
+    private void Start()
     {
         Initialize();
         SceneManager.LoadScene(Constants.GameScene);

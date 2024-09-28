@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 // Class example copied from unity tutorials video https://www.youtube.com/watch?v=WLDgtRNK2VE
 // Upgraded from video https://www.youtube.com/watch?v=tE1qH8OxO2Y

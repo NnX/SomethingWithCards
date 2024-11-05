@@ -15,5 +15,6 @@ public class Initializer : MonoBehaviour
         // TODO initialize configs
         // TODO load saves
         // TODO initialize something more ..
+        // TODO 
     } 
 }

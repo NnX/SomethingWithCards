@@ -6,7 +6,7 @@ namespace Utils
     {
         private void Start()
         {
-            Application.targetFrameRate = 30; 
+            Application.targetFrameRate = 15; 
         }
     }
 }
